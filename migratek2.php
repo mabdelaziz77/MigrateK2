@@ -224,7 +224,10 @@ class Migratek2 extends JApplicationCli
                     $this->_copyCustomFields($item, $extraFields);    
                 }
                 
-                
+                $attachments = $this->getAttachments($k2Item->id);
+                if (count($attachments) > 0) {
+                    $this->_addAttachments($item, $attachments);
+                }
                 if($k2Item->featured == 1){
                 	$itemsFeatured[] = $item->id;
                 }					
@@ -232,7 +235,7 @@ class Migratek2 extends JApplicationCli
             if(count($itemsFeatured) > 0)  $this->saveFeatured($itemsFeatured);
         }
 
-        $this->log('Finished migrating k2 database', JLog::INFO);
+        $this->log('Finished migrating K2 database', JLog::INFO);
 	}
 
 
@@ -356,6 +359,40 @@ class Migratek2 extends JApplicationCli
 		
 		return $rows;
 	}
+
+    /**
+     * Adds attachments to an item.
+     * @param object $item The Joomla content item to copy custom fields to.
+     * @param array $attachments A list of attachments to be added.
+     * @return void
+     */
+    private function _addAttachments($item, $attachments){
+        $attachmentsFieldId = (int) $this->config->get('attachmentCFId');
+        $attachmentsFolder = $this->config->get('attachmentsFolder');
+        if($attachmentsFieldId > 0){
+            $newAttachments = array();
+            foreach ($attachments as $attachment) {
+                if (JFile::exists(realpath(JPATH_SITE.'/media/k2/attachments/'.$attachment->filename))) {
+                    JFile::copy(realpath(JPATH_SITE.'/media/k2/attachments/'.$attachment->filename), JPATH_SITE.'/'.$attachmentsFolder.'/'.$attachment->filename);
+                    $newAttachments[] = array(
+                        'title' => $attachment->title,
+                        'description' => $attachment->title,
+                        'value' => $attachmentsFolder.'/'. $attachment->filename,
+                    );
+                }
+            }
+            if(count($newAttachments) > 0){
+                $fieldModel = JModelLegacy::getInstance('Field', 'FieldsModel', ['ignore_request' => true]);
+                
+                $fieldModel->setFieldValue(
+                    $attachmentsFieldId,
+                    $item->id,
+                    json_encode($newAttachments)
+                );
+            }
+        }
+    }
+
 
     /**
      * Copies custom fields from a K2 item to a Joomla content item.
