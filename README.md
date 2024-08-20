@@ -35,7 +35,9 @@ This Joomla 3.x CLI script helps Joomla users who are using the K2 extension to 
    ```
 3. If your Super Admin user has 2FA enabled, you will be prompted to enter the secret key. If not, simply press Enter.
 4. The script will display messages indicating the progress of the migration, including the categories and K2 items being migrated.
-5. Once the process is complete, you will see the message "Finished migrating K2 database."
+5. Once the process is complete, you will see the message "Finished migrating K2 database.". See the screenshot below.
+   ![image](https://github.com/user-attachments/assets/6cd4462f-343c-4290-81b3-528d1f171a35)
+
 
 ## ☕ Support This Project
 
