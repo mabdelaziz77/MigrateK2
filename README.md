@@ -14,7 +14,7 @@ This Joomla 3.x CLI script helps Joomla users who are using the K2 extension to 
 2. Fill in the required configuration values in the `migratek2/config.php` file:
    - **Super Admin Username and Password:** Required to create Joomla articles, categories, etc.
    - **Items Per Loop:** Set the number of items to migrate per loop to avoid timeouts.
-   - **Extra Fields Mapping:** Map K2 extra fields to corresponding Joomla Articles custom fields. Below is an example of how to do this:
+   - **Extra Fields Mapping:** Map K2 extra fields to corresponding Joomla Articles custom fields (MUST be created before running the script). Below is an example of how to do this:
      ```php
      public $cfMapping = [
          // 'k2_field_id' => 'content_field_id',
@@ -24,7 +24,7 @@ This Joomla 3.x CLI script helps Joomla users who are using the K2 extension to 
      ];
      ```
      In this example, K2 field with ID `3` is mapped to Joomla content field with ID `1`, K2 field `1` to Joomla content field `2`, and so on.
-   - **Attachment Field:** Specify the name of the attachment custom field (Note: Migration of K2 attachments is not yet implemented).
+   - **Attachment Field:** Specify the ID of the attachment custom field (Note: Migration of K2 attachments is not yet implemented).
 
 ## Usage
 
