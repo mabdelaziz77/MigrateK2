@@ -7,6 +7,7 @@ This Joomla 3.x CLI script helps Joomla users who are using the K2 extension to 
 - Joomla 3.10
 - PHP 7.4
 - Terminal or Shell access
+- Article custom fields (corresponding to K2 extra fields with a matching field type)
 
 ## Installation
 
@@ -24,7 +25,8 @@ This Joomla 3.x CLI script helps Joomla users who are using the K2 extension to 
      ];
      ```
      In this example, K2 field with ID `3` is mapped to Joomla content field with ID `1`, K2 field `1` to Joomla content field `2`, and so on.
-   - **Attachment Field:** Specify the ID of the attachment custom field (Note: Migration of K2 attachments is not yet implemented).
+   - **Attachment Field:** Specify the ID of the attachment custom field (Note: only `File Upload` type of `Advanced Custom Fields` is supported for now).
+   - **Attachment Folder:** Specify the attachments folder exactly the same as configured in the `File Upload` field.
 
 ## Usage
 

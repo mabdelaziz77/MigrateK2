@@ -12,6 +12,9 @@ class MigK2Config
 
 	/* Attachment field id */
 	public $attachmentCFId = '';
+	
+	/* Attachments Folder*/
+	public $attachmentsFolder = '';
 
 	/* K2 items migrated per loop, just to avoid timeout */
 	public $itemsPerLoop = 50;
